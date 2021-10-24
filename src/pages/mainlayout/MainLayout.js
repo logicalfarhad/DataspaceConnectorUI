@@ -2,7 +2,6 @@ import NavigationMenu from "@/components/navigationmenu/NavigationMenu.vue";
 import InfoBox from "@/components/infobox/InfoBox.vue";
 import dataUtils from "@/utils/dataUtils";
 import errorUtils from "@/utils/errorUtils";
-
 // import BrokersPage from "@/pages/brokers/BrokersPage.vue";
 
 export default {

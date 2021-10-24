@@ -12,6 +12,7 @@ import InstallAppsPage from "@/pages/appstores/installapps/InstallAppsPage.vue";
 import SettingsPage from "@/pages/settings/SettingsPage.vue";
 import BackendConnectionsPage from "@/pages/dataoffering/backendconnections/BackendConnectionsPage.vue";
 import ResourceCatalogsPage from "@/pages/dataoffering/resources/addresource/catalog/ResourceCatalogsPage.vue";
+import IDSAnoymizer from "@/pages/dataoffering/anonymizer/IDSAnoymizer.vue";
 
 export default {
     getPageStructure() {
@@ -66,7 +67,14 @@ export default {
                 name: "Catalogs (Offering)",
                 component: ResourceCatalogsPage,
                 subpages: []
-            }]
+            },
+            {
+                path: "anonymizer",
+                name: "ARX Anonymizer",
+                component: IDSAnoymizer,
+                subpages: []
+            }
+        ]
         }, {
             path: null,
             name: "Data Consumption",

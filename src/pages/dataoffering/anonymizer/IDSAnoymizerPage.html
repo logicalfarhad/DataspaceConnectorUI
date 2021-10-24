@@ -1,0 +1,64 @@
+<div class="content">
+  <v-stepper v-model="e1">
+    <v-stepper-header>
+      <v-stepper-step :complete="e1 > 1" step="1">
+        Name of step 1
+      </v-stepper-step>
+
+      <v-divider></v-divider>
+
+      <v-stepper-step :complete="e1 > 2" step="2">
+        Name of step 2
+      </v-stepper-step>
+
+      <v-divider></v-divider>
+
+      <v-stepper-step step="3">
+        Name of step 3
+      </v-stepper-step>
+    </v-stepper-header>
+
+    <v-stepper-items>
+      <v-stepper-content step="1">
+        <FileUpload></FileUpload>
+        <v-btn color="primary" @click="e1 = 2">
+          Continue
+        </v-btn>
+      </v-stepper-content>
+
+      <v-stepper-content step="2">
+        <v-card elevation="2" raised>
+          <v-card-title>Datatable with API</v-card-title>
+          <v-data-table :page="page" :pageCount="numberOfPages" :headers="headers" :items="passengers"
+            :options.sync="options" :server-items-length="totalPassengers" :loading="loading" class="elevation-1">
+            <template v-slot:item.logo="{ item }">
+              <v-img src="item.airline.logo" style="width: 10%;"></v-img>
+            </template>
+            <template v-slot:item.website="{ item }">
+              <a :href="item.airline.website">{{ item.airline.website }}</a>
+            </template>
+          </v-data-table>
+          <v-btn color="primary" @click="e1 = 1">
+            Previous
+          </v-btn>
+
+          <v-btn color="primary" @click="e1 = 3">
+            Continue
+          </v-btn>
+        </v-card>
+      </v-stepper-content>
+
+      <v-stepper-content step="3">
+        <v-card class="mb-12" color="grey lighten-1" height="200px">
+
+        </v-card>
+        <v-btn color="primary" @click="e1 = 1">
+          Continue
+        </v-btn>
+        <v-btn color="primary" @click="e1 = 2">
+          Cancel
+        </v-btn>
+      </v-stepper-content>
+    </v-stepper-items>
+  </v-stepper>
+</div>
