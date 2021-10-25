@@ -15,6 +15,20 @@ export default {
         });
     },
 
+    async fileUpload(selectedFile) {
+        let formData = new FormData();
+        formData.append("file", selectedFile);
+        const request_config = {
+            method: "POST",
+            url: backendUrl + "/upload",
+            data: formData
+        };
+
+        let res = await Axios(request_config);
+        console.log(res);
+        return res;
+    },
+
     async callConnector(type, url, params, body) {
         return await this.callAndCheckError(true, type, url, params, body);
     },

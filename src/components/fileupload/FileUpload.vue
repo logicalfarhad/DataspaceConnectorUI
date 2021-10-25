@@ -36,6 +36,7 @@
   </v-row>
 </template>
 <script>
+import dataUtils from "@/utils/dataUtils";
 export default {
   name: "file-upload",
   props: {},
@@ -62,7 +63,11 @@ export default {
     onFileChanged(e) {
       this.selectedFile = e.target.files[0];
     },
-    importTxt() {},
+    async importTxt() {
+      console.log(this.selectedFile)
+      let response = await dataUtils.upload(this.selectedFile);
+      console.log(response);
+    },
   },
   computed: {},
 };

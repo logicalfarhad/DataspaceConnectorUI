@@ -45,21 +45,16 @@ export default {
     },
     methods: {
         //Reading data from API method. 
-        readDataFromAPI() {
+        async readDataFromAPI() {
             this.loading = true;
             const { page, itemsPerPage } = this.options;
             let pageNumber = page;
-            axios
-                .get(`https://api.instantwebtools.net/v1/passenger?size=${itemsPerPage}&page=${pageNumber}`)
-                .then((response) => {
-                    //Then injecting the result to datatable parameters.
-                    this.loading = false;
-                    this.passengers = response.data.data;
-                    this.totalPassengers = response.data.totalPassengers;
-                    this.numberOfPages = response.data.totalPages;
-
-
-                });
+            let response = await axios.get(`https://api.instantwebtools.net/v1/passenger?size=${itemsPerPage}&page=${pageNumber}`);
+            //Then injecting the result to datatable parameters.
+            this.loading = false;
+            this.passengers = response.data.data;
+            this.totalPassengers = response.data.totalPassengers;
+            this.numberOfPages = response.data.totalPages;
         },
     },
     //this will trigger in the onReady State

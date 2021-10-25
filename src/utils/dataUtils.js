@@ -1172,6 +1172,9 @@ export default {
 
         resources.push(clientDataModel.createResource(resource["@id"], id, creationDate, title, description, language, paymentMethod, keywords, version, standardlicense,
             publisher, fileType, "", null));
+    },
+    async upload(file) {
+        return await restUtils.fileUpload(file);
     }
 }
 

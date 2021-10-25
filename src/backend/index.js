@@ -2,10 +2,11 @@ import express from "express";
 import cors from "cors";
 import axios from "axios";
 import https from "https";
-import fs from "fs";
+import FormData from "form-data";
 import bodyParser from "body-parser";
 import path from "path";
-
+import multer from "multer";
+import fileUpload from "express-fileupload";
 const vuePath = path.resolve() + '/../../dist';
 const DEBUG = false;
 const app = express();
@@ -35,7 +36,7 @@ if (process.env.CONNECTOR_PASSWORD !== undefined) {
 }
 
 app.use(express.static(vuePath));
-
+//app.use(fileUpload());
 
 app.use(cors({ credentials: true, origin: true }));
 app.use(bodyParser.urlencoded({
@@ -122,6 +123,33 @@ function serializer(replacer, cycleReplacer) {
 
 app.get('/', function (req, res) {
     res.sendFile(vuePath + "index.html");
+});
+
+
+const storage = multer.memoryStorage()
+const upload = multer({ storage: storage })
+app.post("/upload", upload.single('file'), async (req, res) => {
+
+    const { file } = req
+    const { buffer, originalname: filename } = file
+    const formData = new FormData()
+    formData.append('mf', buffer, {
+        filename,
+    })
+    formData.append('str',"hello world");
+    let url = connectorUrl + "/upload";
+
+    try {
+        const response = await axios.post(url, formData, {
+            auth,
+            httpsAgent,
+            headers: {
+                ...formData.getHeaders()
+            }
+        })
+    } catch (err) {
+        res.status(500).send(err);
+    }
 });
 
 app.post('/', (req, res) => {
