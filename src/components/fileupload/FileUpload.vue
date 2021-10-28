@@ -65,7 +65,6 @@ export default {
     },
     async importTxt() {
       if (this.selectedFile) {
-        console.log(this.selectedFile);
         let response = await dataUtils.upload(this.selectedFile);
         console.log(response);
       }
