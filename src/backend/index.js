@@ -6,7 +6,6 @@ import FormData from "form-data";
 import bodyParser from "body-parser";
 import path from "path";
 import multer from "multer";
-import fileUpload from "express-fileupload";
 const vuePath = path.resolve() + '/../../dist';
 const DEBUG = false;
 const app = express();

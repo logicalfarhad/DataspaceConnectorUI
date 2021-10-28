@@ -29,8 +29,8 @@
       <v-card width="600" height="300" raised>
         <v-card-title>File contents:</v-card-title>
         <v-card-text
-          ><p>{{ data }}</p></v-card-text
-        >
+          ><p>{{ data }}</p>
+        </v-card-text>
       </v-card>
     </v-col>
   </v-row>
@@ -64,11 +64,15 @@ export default {
       this.selectedFile = e.target.files[0];
     },
     async importTxt() {
-      console.log(this.selectedFile)
-      let response = await dataUtils.upload(this.selectedFile);
-      console.log(response);
+      if (this.selectedFile) {
+        console.log(this.selectedFile);
+        let response = await dataUtils.upload(this.selectedFile);
+        console.log(response);
+      }
     },
   },
-  computed: {},
+  computed: {
+    
+  },
 };
 </script>
