@@ -21,7 +21,7 @@ export default {
         const request_config = {
             method: "POST",
             url: backendUrl + "/upload",
-            data: formData
+            data: formData,
         };
 
         let res = await Axios(request_config);

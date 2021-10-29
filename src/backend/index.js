@@ -145,8 +145,12 @@ app.post("/upload", upload.single('file'), async (req, res) => {
             headers: {
                 ...formData.getHeaders()
             }
-        })
+        });
+
+        res.send(response.data);
+        console.log(response.data);
     } catch (err) {
+        console.error(err);
         res.status(500).send(err);
     }
 });

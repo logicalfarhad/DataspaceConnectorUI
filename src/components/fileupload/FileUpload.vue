@@ -31,6 +31,12 @@
         <v-card-text
           ><p>{{ data }}</p>
         </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn right color="accent" elevation="2" @click="previewFile"
+            >Preview</v-btn
+          >
+        </v-card-actions>
       </v-card>
     </v-col>
   </v-row>
@@ -69,6 +75,11 @@ export default {
         console.log(response);
       }
     },
+
+    async previewFile(){
+      let response = await dataUtils.preview();
+      this.data = response;
+    }
   },
   computed: {
     

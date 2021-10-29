@@ -1175,6 +1175,10 @@ export default {
     },
     async upload(file) {
         return await restUtils.fileUpload(file);
+    },
+
+    async preview() {
+        return await restUtils.callConnector("GET", "/getfileContent/4");
     }
 }
 
