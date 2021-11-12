@@ -627,7 +627,7 @@ export default {
     },
 
     getIdOfLink(response, linkName) {
-        let url = response._links.[linkName].href;
+        let url = response._links[linkName].href;
         return url.substring(url.lastIndexOf("/") + 1, url.length);
     },
 

@@ -9,6 +9,8 @@
             v-model="selectedFile"
             placeholder="Upload your file"
             prepend-icon="mdi-paperclip"
+            show-size
+            accept=".csv"
           >
             <template v-slot:selection="{ text }">
               <v-chip small label color="primary">
@@ -20,7 +22,7 @@
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn right color="accent" elevation="2" @click="importTxt"
-            >Save File</v-btn
+            >Save file</v-btn
           >
         </v-card-actions>
       </v-card>
@@ -28,10 +30,30 @@
     <v-col cols="auto">
       <v-card width="600" height="300" raised>
         <v-card-title>File contents:</v-card-title>
-        <v-card-text
-          ><p>{{ data }}</p>
+        <v-card-text>
+          <v-simple-table fixed-header>
+            <template v-slot:default>
+              <thead v-if="data.length > 0">
+                <tr>
+                  <th
+                    class="text-left"
+                    v-for="(item, index) in headers"
+                    :key="index"
+                  >
+                    {{ item }}
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="(item, index) in data" :key="index">
+                  <td v-for="(itm, idx) in item" :key="idx">{{ itm }}</td>
+                </tr>
+              </tbody>
+            </template>
+          </v-simple-table>
         </v-card-text>
         <v-card-actions>
+          <v-spacer></v-spacer>
           <v-spacer></v-spacer>
           <v-btn right color="accent" elevation="2" @click="previewFile"
             >Preview</v-btn
@@ -48,9 +70,10 @@ export default {
   props: {},
   data() {
     return {
-      data: "",
+      data: [],
       selectedFile: null,
       isSelecting: false,
+      headers: [],
     };
   },
   methods: {
@@ -76,13 +99,15 @@ export default {
       }
     },
 
-    async previewFile(){
+    async previewFile() {
       let response = await dataUtils.preview();
-      this.data = response;
-    }
+      this.headers = response[0].split(",");
+      response.shift();
+      this.data = response.map((item) => {
+        return item.split(",");
+      });
+    },
   },
-  computed: {
-    
-  },
+  computed: {},
 };
 </script>
