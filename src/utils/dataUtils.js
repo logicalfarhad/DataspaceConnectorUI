@@ -1179,6 +1179,10 @@ export default {
 
     async preview() {
         return await restUtils.callConnector("GET", "/getfileContent/4");
+    },
+
+    async getallitemsfromcsv() {
+        return await restUtils.callConnector("GET","/getItemList");
     }
 }
 

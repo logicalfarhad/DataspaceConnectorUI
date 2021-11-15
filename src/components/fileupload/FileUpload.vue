@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 <template>
   <v-row justify="start">
     <v-col cols="auto">
@@ -94,17 +95,17 @@ export default {
     },
     async importTxt() {
       if (this.selectedFile) {
-        let response = await dataUtils.upload(this.selectedFile);
-        console.log(response);
+         await dataUtils.upload(this.selectedFile);
+       // console.log(response);
       }
     },
 
     async previewFile() {
       let response = await dataUtils.preview();
-      this.headers = response[0].split(",");
+      this.headers = response[0].split(";");
       response.shift();
       this.data = response.map((item) => {
-        return item.split(",");
+        return item.split(";");
       });
     },
   },
