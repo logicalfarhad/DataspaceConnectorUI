@@ -75,7 +75,7 @@ export default {
                 this.items = [];
                 let _items = await this.getHeaders();
                 let _headers = _items.shift();
-                let headers = [..._headers.split(';')];
+                let headers = [..._headers.split(',')];
                 headers.map((item) => {
                     let column = {
                         columnName: item,
@@ -99,12 +99,17 @@ export default {
         editItem(item) {
             console.log(item);
         },
-        configureItem(item) {
+       async configureItem(item) {
+            console.log(item);
             this.editedItem = Object.assign({}, item)
             this.dialog = true
+            let interval = await this.getitemlist();
+            console.log(interval)
         }
-        , save() { },
-        close() { 
+        , save() {
+            console.log("save called")
+        },
+        close() {
             this.dialog = false
         },
     },
